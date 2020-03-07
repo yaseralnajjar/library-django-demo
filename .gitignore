@@ -1,0 +1,7 @@
+# virtual environment
+venv
+
+# database
+db
+
+*.pyc

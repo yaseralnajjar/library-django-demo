@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "venv/bin/python3.6",
+
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/venv/*/**": true,
+        "**/db/*/**": true,
+      }
+}
