@@ -1,0 +1,39 @@
+GET /authors? books_count returns 200 OK
+```
+authors
+	id
+	email
+	books_count
+```
+
+GET /books? name&isbn&author_mail returns 200 OK
+```
+books
+	name
+	isbn
+	author_email
+```
+
+PUT /books accepts
+```
+name
+isbn
+```
+
+PUT /books returns 200 OK
+PUT /books returns 403 Forbidden
+
+
+
+POST /auth/register accepts
+```
+name
+email
+pass
+```
+
+POST /auth/login accepts
+```
+user
+pass
+```

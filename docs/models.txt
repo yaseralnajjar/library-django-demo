@@ -1,0 +1,12 @@
+Author
+    username
+    pass
+	name
+	(how many books)
+	
+Book
+	id
+	name
+	ISBN
+	
+	author_id
