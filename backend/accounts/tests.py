@@ -17,7 +17,7 @@ class UserRegistrationAPIViewTestCase(APITestCase):
         '''
         user_data = {
             'username': 'testuser',
-            'email': 'test@testuser.com',
+            'first_name': 'Tester',
             'password': '123123',
             'confirm_password': '123123'
         }
@@ -31,7 +31,7 @@ class UserRegistrationAPIViewTestCase(APITestCase):
         '''
         user_data_1 = {
             'username': 'testuser',
-            'email': 'test@testuser.com',
+            'first_name': 'Tester',
             'password': '123123',
             'confirm_password': '123123'
         }
@@ -40,7 +40,7 @@ class UserRegistrationAPIViewTestCase(APITestCase):
 
         user_data_2 = {
             'username': 'testuser',
-            'email': 'test2@testuser.com',
+            'first_name': 'Tester',
             'password': '123123',
             'confirm_password': '123123'
         }
@@ -77,9 +77,8 @@ class UserTokenAPIViewTestCase(APITestCase):
 
     def setUp(self):
         self.username = 'john'
-        self.email = 'john@snow.com'
         self.password = 'you_know_nothing'
-        self.user = User.objects.create_user(self.username, self.email, self.password)
+        self.user = User.objects.create_user(self.username, self.password)
         self.token = Token.objects.create(user=self.user)
         self.api_authentication()
 

@@ -45,6 +45,7 @@ class UserLoginSerializer(serializers.Serializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(write_only=True)
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     default_error_messages = {
@@ -56,6 +57,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = (
             User.USERNAME_FIELD,
             User._meta.pk.name,
+            'first_name',
             'password',
         )
 
