@@ -8,17 +8,17 @@ from rest_framework.authtoken.models import Token
 from . import constants
 from .utils import ObjDict
 
-CONSTANTS = ObjDict({"messages": constants.Messages})
+CONSTANTS = ObjDict({'messages': constants.Messages})
 
 User = get_user_model()
 
 
 class TokenSerializer(serializers.ModelSerializer):
-    auth_token = serializers.CharField(source="key")
+    auth_token = serializers.CharField(source='key')
 
     class Meta:
         model = Token
-        fields = ("auth_token",)
+        fields = ('auth_token',)
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -35,7 +35,7 @@ class UserLoginSerializer(serializers.Serializer):
         self.user = None
 
     def validate(self, attrs):
-        self.user = authenticate(username=attrs.get("username"), password=attrs.get('password'))
+        self.user = authenticate(username=attrs.get('username'), password=attrs.get('password'))
         if self.user:
             if not self.user.is_active:
                 raise serializers.ValidationError(self.error_messages['inactive_account'])
@@ -45,10 +45,10 @@ class UserLoginSerializer(serializers.Serializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(style={"input_type": "password"}, write_only=True)
+    password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     default_error_messages = {
-        "cannot_create_user": CONSTANTS.messages.CANNOT_CREATE_USER_ERROR
+        'cannot_create_user': CONSTANTS.messages.CANNOT_CREATE_USER_ERROR
     }
 
     class Meta:
@@ -56,19 +56,19 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = (
             User.USERNAME_FIELD,
             User._meta.pk.name,
-            "password",
+            'password',
         )
 
     def validate(self, attrs):
         user = User(**attrs)
-        password = attrs.get("password")
+        password = attrs.get('password')
 
         try:
             validate_password(password, user)
         except django_exceptions.ValidationError as e:
             serializer_error = serializers.as_serializer_error(e)
             raise serializers.ValidationError(
-                {"password": serializer_error["non_field_errors"]}
+                {'password': serializer_error['non_field_errors']}
             )
 
         return attrs
@@ -77,7 +77,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         try:
             user = self.perform_create(validated_data)
         except IntegrityError:
-            self.fail("cannot_create_user")
+            self.fail('cannot_create_user')
 
         return user
 

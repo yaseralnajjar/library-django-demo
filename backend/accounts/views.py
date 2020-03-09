@@ -10,7 +10,7 @@ from .serializers import (TokenSerializer, UserCreateSerializer,
 
 
 class UserTokenAPIView(RetrieveDestroyAPIView):
-    lookup_field = "key"
+    lookup_field = 'key'
     serializer_class = TokenSerializer
     queryset = Token.objects.all()
 
@@ -18,14 +18,14 @@ class UserTokenAPIView(RetrieveDestroyAPIView):
         return queryset.filter(user=self.request.user)
 
     def retrieve(self, request, key, *args, **kwargs):
-        if key == "current":
+        if key == 'current':
             instance = Token.objects.get(key=request.auth.key)
             serializer = self.get_serializer(instance)
             return Response(serializer.data)
         return super(UserTokenAPIView, self).retrieve(request, key, *args, **kwargs)
 
     def destroy(self, request, key, *args, **kwargs):
-        if key == "current":
+        if key == 'current':
             Token.objects.get(key=request.auth.key).delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return super(UserTokenAPIView, self).destroy(request, key, *args, **kwargs)
@@ -64,7 +64,7 @@ class UserRegistrationAPIView(CreateAPIView):
 
         token, created = Token.objects.get_or_create(user=user)
         data = serializer.data
-        data["token"] = token.key
+        data['token'] = token.key
 
         headers = self.get_success_headers(serializer.data)
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
