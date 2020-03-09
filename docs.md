@@ -13,15 +13,13 @@ docker exec -it ID bash
 chmod +x /app/init.sh
 /app/init.sh
 
-
 cd /app
 pip install virtualenv
 virtualenv /app/venv
 source /app/venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py runserver 0.0.0.0:8000
-
+echo "from accounts.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 
 ## Running an Existing Container
 
@@ -31,3 +29,11 @@ docker exec -it ID bash
 service postgresql restart
 script /app/venv/bin/activate
 
+## Running Django App
+
+python manage.py runserver 0.0.0.0:8000
+
+
+## Testing
+
+python manage.py test
