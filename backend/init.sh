@@ -8,6 +8,7 @@ su - postgres -c "psql -c \"CREATE DATABASE dbapp;\""
 
 create_user_queries=$"
   CREATE USER dbuser WITH PASSWORD 'dbpass';
+  ALTER USER dbuser CREATEDB;
   ALTER ROLE dbuser SET client_encoding TO 'utf8';
   ALTER ROLE dbuser SET default_transaction_isolation TO 'read committed';
   ALTER ROLE dbuser SET timezone TO 'UTC';
