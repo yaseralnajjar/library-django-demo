@@ -3,6 +3,7 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true,
+    "**/__pycache__/*/**": true,
     "**/venv/*/**": true,
     "**/db/*/**": true,
   },
