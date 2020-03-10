@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Sum
+from django.db.models import Count
 from django.db.models.functions import Coalesce
 from rest_framework.generics import (ListAPIView, ListCreateAPIView,
                                      RetrieveUpdateDestroyAPIView)
@@ -20,7 +20,7 @@ class AuthorListAPIView(ListAPIView):
         we use Coalesce to make sure no nulls returned from summation of books
         https://stackoverflow.com/a/35413920/4565520
         '''
-        return User.objects.annotate(books_count=Coalesce(Sum('book'), 0))\
+        return User.objects.annotate(books_count=Coalesce(Count('book'), 0))\
                            .values('id', 'first_name', 'books_count')
 
 
