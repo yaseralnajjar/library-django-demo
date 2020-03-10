@@ -1,39 +1,86 @@
-GET /authors? books_count returns 200 OK
-```
-authors
-	id
-	email
-	books_count
-```
-
-GET /books? name&isbn&author_mail returns 200 OK
+GET /books? name&isbn&publish_date&author_id returns 200 OK
+HEADERS{ Authorization: Token TOKEN_HERE}
 ```
 books
+	id
 	name
 	isbn
-	author_email
+	publish_date
+	author (id)
 ```
 
-PUT /books accepts
+POST /books accepts
+HEADERS{ Authorization: Token TOKEN_HERE}
 ```
 name
 isbn
+publish_date
+author (id)
+```
+
+POST /books returns 201 CREATED
+
+
+PUT /books/BOOK_ID_HERE accepts
+HEADERS{ Authorization: Token TOKEN_HERE}
+```
+name
+isbn
+publish_date
 ```
 
 PUT /books returns 200 OK
 PUT /books returns 403 Forbidden
 
 
-
-POST /auth/register accepts
+DELETE /books/BOOK_ID accepts
+HEADERS{ Authorization: Token TOKEN_HERE}
 ```
-name
-email
-pass
 ```
 
-POST /auth/login accepts
+DELETE /books returns 204 NO_CONTENT
+
+
+
+
+
+GET /authors? books_count returns 200 OK
 ```
-user
-pass
+authors
+	id
+	name
+	books_count
+```
+
+
+
+
+
+POST /auth/users/register accepts
+```
+first_name
+username
+password
+```
+
+POST /auth/users/login accepts
+```
+username
+password
+```
+
+POST /auth/users/login returns
+```
+auth_token
+```
+
+GET /auth/tokens/TOKEN_HERE returns
+HEADERS{ Authorization: Token TOKEN_HERE}
+```
+auth_token
+```
+
+DELETE /auth/tokens/TOKEN_HERE returns
+HEADERS{ Authorization: Token TOKEN_HERE}
+```
 ```
