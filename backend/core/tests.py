@@ -11,6 +11,18 @@ from .serializers import BookSerializer
 User = get_user_model()
 
 
+class AuthorListAPIViewTestCase(APITestCase):
+    url = reverse('authors:list')
+
+    def setUp(self):
+        User.objects.create_user('john', 'john@snow.com', 'you_know_nothing')
+        User.objects.create_user('doe', 'john@snow.com', 'you_know_nothing')
+
+    def test_list_authors(self):
+        response = self.client.get(self.url)
+        self.assertTrue(len(json.loads(response.content)) == User.objects.count())
+
+
 class BookListCreateAPIViewTestCase(APITestCase):
     url = reverse('books:list')
 
