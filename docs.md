@@ -27,7 +27,7 @@ docker ps -a
 docker restart ID
 docker exec -it ID bash
 service postgresql restart
-script /app/venv/bin/activate
+source /app/venv/bin/activate
 
 ## Running Django App
 
