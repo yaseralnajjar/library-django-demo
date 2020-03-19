@@ -29,12 +29,18 @@ class AuthorListAPIView(ListAPIView):
 
 class BookListCreateAPIView(ListCreateAPIView):
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticated, ]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['id', 'name', 'isbn', 'publish_date', 'author']
 
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = []
+        else:
+            permission_classes = [IsAuthenticated, ]
+        return [permission() for permission in permission_classes]
+
     def get_queryset(self):
-        return Book.objects.filter(author=self.request.user)
+        return Book.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

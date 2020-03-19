@@ -32,12 +32,22 @@ class BookListCreateAPIViewTestCase(APITestCase):
         self.password = 'you_know_nothing'
         self.user = User.objects.create_user(self.username, self.email, self.password)
         self.token = Token.objects.create(user=self.user)
-        self.api_authentication()
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
+    def test_list_books(self):
+        Book.objects.create(name='Awesome Book', isbn='978-3-16-148410-0',
+                            publish_date='2020-01-01', author=self.user)
+        Book.objects.create(name='Awesome Book', isbn='978-3-16-148410-0',
+                            publish_date='2020-01-01', author=self.user)
+        response = self.client.get(self.url)
+        self.assertEqual(Book.objects.count(), len(json.loads(response.content)))
+        self.assertEqual(200, response.status_code)
+
     def test_create_book(self):
+        self.api_authentication()
+
         response = self.client.post(self.url, {'name': 'Awesome Book',
                                                'isbn': '978-3-16-148410-0',
                                                'publish_date': '2020-01-01',
@@ -45,6 +55,8 @@ class BookListCreateAPIViewTestCase(APITestCase):
         self.assertEqual(201, response.status_code)
 
     def test_bad_isbn(self):
+        self.api_authentication()
+
         response = self.client.post(self.url, {'name': 'Awesome Book',
                                                'isbn': '123456',
                                                'publish_date': '2020-01-01',
@@ -55,6 +67,8 @@ class BookListCreateAPIViewTestCase(APITestCase):
         '''
         Test to verify author books list
         '''
+        self.api_authentication()
+
         Book.objects.create(name='Awesome Book', isbn='978-3-16-148410-0',
                             publish_date='2020-01-01', author=self.user)
         response = self.client.get(self.url)

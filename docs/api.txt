@@ -1,5 +1,4 @@
 GET /books? name&isbn&publish_date&author_id returns 200 OK
-HEADERS{ Authorization: Token TOKEN_HERE}
 ```
 books
 	id
