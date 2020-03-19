@@ -1,9 +1,12 @@
 ## First Time
 
+cd backend/
+
 docker run -d \
   --name djangodev \
   -v ${PWD}:/app \
   -v ${PWD}/db:/var/lib/postgresql/11/main \
+  -v ${PWD}/venv:/app/venv \
   -p 8000:8000 \
   python:3.8.2-slim \
   tail -f /dev/null
