@@ -55,7 +55,7 @@ authors
 
 
 
-POST /auth/users/register accepts
+POST /auth/users/ accepts
 ```
 first_name
 username
