@@ -4,4 +4,11 @@ venv
 # database
 db
 
+# pycache
 *.pyc
+
+# js packages
+node_modules
+
+# distribution folder
+dist
