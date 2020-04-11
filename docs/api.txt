@@ -14,7 +14,6 @@ HEADERS{ Authorization: Token TOKEN_HERE}
 name
 isbn
 publish_date
-author (id)
 ```
 
 POST /books returns 201 CREATED
