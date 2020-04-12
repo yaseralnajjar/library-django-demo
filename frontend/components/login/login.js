@@ -1,3 +1,4 @@
+import * as auth from '@core/auth.js'
 import * as client from '@core/client.js'
 
 export default function login() {
@@ -15,6 +16,7 @@ export default function login() {
 
     client.login(formData).then(response => {
       console.log(response)
+      auth.persistLogin(response.auth_token)
     }).catch(error => {
       console.log(error)
     })
