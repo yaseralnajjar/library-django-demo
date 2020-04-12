@@ -20,11 +20,11 @@ export default function booksList() {
               [
                 {
                   elem: 'div',
-                  inner: 'Name:'
+                  text: 'Name:'
                 },
                 {
                   elem: 'div',
-                  inner: book.name
+                  text: book.name
                 },
               ]
           },
@@ -39,7 +39,7 @@ export default function booksList() {
               },
               {
                 elem: 'div',
-                inner: book.isbn
+                text: book.isbn
               },
             ]
           },
@@ -49,11 +49,11 @@ export default function booksList() {
             children: [
               {
                 elem: 'div',
-                inner: 'Publish Date:'
+                text: 'Publish Date:'
               },
               {
                 elem: 'div',
-                inner: book.publish_date
+                text: book.publish_date
               },
             ]
           },

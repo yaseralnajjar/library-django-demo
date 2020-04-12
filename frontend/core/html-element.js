@@ -43,7 +43,7 @@ htmlElement.prototype.addChild = function (args = {}) {
   const child = htmlElement.create(args.elem)
     .addId(args.id)
     .addClasses(args.classes) // addClasses can take an array or a comma-separated list
-    .addTextContent(args.inner)
+    .addTextContent(args.text)
     .addChildren(args.children)
 
   this.append(child)
