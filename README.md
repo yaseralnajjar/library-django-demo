@@ -1,1 +1,1 @@
-# Library
+# Library Django Demo
