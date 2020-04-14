@@ -6,6 +6,11 @@ function url(appendedURL) {
   return baseURL + appendedURL
 }
 
+function rerouteToLogin() {
+  window.location.assign('/login.html')
+}
+
+
 async function request(path, data, withCredentials = false) {
   const options = {
     method: 'POST',
@@ -23,7 +28,13 @@ async function request(path, data, withCredentials = false) {
 
   const response = await fetch(url(path), options)
 
-  return await response.json()
+  const result = await response.json()
+
+  if (auth.isTokenInvalidated(result)) {
+    rerouteToLogin()
+  }
+
+  return result
 }
 
 export async function registerNewUser(data) {
@@ -48,6 +59,6 @@ export async function getBooks() {
 
 export async function addBook(data) {
   const withCredentials = true
-  return request('/books/', data, withCredentials)
+  return await request('/books/', data, withCredentials)
 }
 
