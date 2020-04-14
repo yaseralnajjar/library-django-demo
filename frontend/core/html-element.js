@@ -1,3 +1,5 @@
+// https://medium.com/simply-web-development/how-to-create-fluent-interfaces-the-easy-way-with-vanilla-javascript-2a61b6558f01
+
 // htmlElement constructor
 export function htmlElement(element) {
   this.element = (element instanceof HTMLElement) ? element : document.createElement(element)
