@@ -1,5 +1,5 @@
 Django==2.2.11
 psycopg2-binary==2.8.4
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 django-isbn-field==0.5.2
 django-cors-headers==3.2.1
